@@ -35,6 +35,11 @@ $(function(){
 	// 	})
 	// }
 
+    
+    //console.table(poker)
+    //var biao2=[{1:"1"}, {2:"2"}, {3:"3"}, {4:"4"}, {5:"5"}, {6:"6"}, {7:"7"}, {8:"8"}, {9:"9"}, {10:"11"}, {11:"12"}, {12:"13"}, {13:"14"}]
+
+    
     //设置牌的随机数
     var poker=[];
     var colors=["c","h","d","s"];
@@ -51,13 +56,12 @@ $(function(){
             biao[huaSe+"-"+shuZi]=true;
         }
     }
-    //console.table(poker)
-    //var biao2=[{1:"1"}, {2:"2"}, {3:"3"}, {4:"4"}, {5:"5"}, {6:"6"}, {7:"7"}, {8:"8"}, {9:"9"}, {10:"11"}, {11:"12"}, {12:"13"}, {13:"14"}]
 
+
+    //设置行数/列数/牌的动画
+    var index=0;
     //点击发牌
     $(".faPai").on("click",function(){
-        //设置行数/列数/牌的动画
-        var index=0;
         for(var i=0;i<7;i++){                  //行数
             for (var j=0;j<i+1;j++){           //列数
                 index+=1;
@@ -96,114 +100,119 @@ $(function(){
                     opacity:1
                 })
         }
-
-        //让下面的操作出现
-    })   
-    
-    //点击重新开始
-    $(".restart").on("click",function(){
-        window.location.reload();
     })
-    //判断点击的牌是否被压住的函数；
-    var killed = function(e){
+    
+        //判断点击的牌是否被压住的函数；
+        var killed = function(e){
             var x=Number($(e).attr("id").split("-")[0]);
             var y=Number($(e).attr("id").split("-")[1]);
-            return ($("#"+(x+1)+"-"+y).length || $("#"+(x+1)+"-"+(y+1)).length);
-
-    }
-
-    var pervious=null;
-    $(".zhuozi .pai").on('click',function(){
-        //判断点击的牌是否有上一张牌的类名并且被被压住
-        if($(this).hasClass('pervious') && killed(this)){
-            return;
-        }
-        //判断是否是K的情况；
-        if($(this).data("shuZi")===13){
-            $(this).animate({
-                top:0,
-                left:700,
-                opacity:0
-            }).queue(function(){
-                $(this).remove();
-            })
-            return;
+            return $("#"+(x+1)+"-"+y).length || $("#"+(x+1)+"-"+(y+1)).length;
         }
 
-        //被选中的牌设置边框和点击时上移
-        $(this).toggleClass("chulie");
-        if($(this).hasClass('chulie')){
-            $(this).animate({top:'-=30'});
-        }else{
-            $(this).animate({top:'+=30'});
-        }
+        var pervious=null;
+        $(".zhuozi .pai").on('click',function(){
+            // //判断点击的牌是否有上一张牌的类名并且被被压住 
+            // if($(this).hasClass('pervious') && killed(this)){
+            //     return;
+            // }
+            // //判断是否是K的情况；
+            // if($(this).data("shuZi")===13){
+            //     $(this).animate({
+            //         top:0,
+            //         left:700,
+            //         opacity:0
+            //     }).queue(function(){
+            //         $(this).remove();
+            //     })
+            //     return;
+            // }
 
-        //第一次点击
-        if(!pervious){
-            pervious=$(this);
-        }else{
-            //第二次点击
-            if((pervious.data("shuZi") + $(this).data("shuZi"))===13){
-                $(".chulie").animate({
-                        top:0,
-                        left:700,
-                        opacity:0
-                    }).queue(function(){
-                         $(".chulie").remove();
-                    })
-                pervious=null;
-            }else{
-                $(".chulie")
-                    .removeClass("chulie")
-                    .animate({
-                        top:"+=30",
-                    })
-                pervious=null;
-            }
-        }
-    })
+            // //被选中的牌设置边框和点击时上移
+            // $(this).toggleClass("chulie");
+            // if($(this).hasClass('chulie')){
+            //     $(this).animate({top:'-=30'});
+            // }else{
+            //     $(this).animate({top:'+=30'});
+            // }
 
-    //换牌的按钮
-    var zIndex=0;
-    $(".zhuozi .change").on("click",function(){
-        zIndex++;
-       $(".pai.left")
-           .eq(-1)
-           .css({zIndex:zIndex})
-           .removeClass("left")
-           .addClass("right")
-           .animate({
-               top:460,
-               left:530
-           })
-    })
-
-    //所有牌返回的次数
-    var time=0;
-    $(".zhuozi .return").on("click",function(){
-        time +=1;
-        if($(".pai.left").length){
-            return;
-        }
-        if(time>3){
-            $(".gameOver img")
-            .css({
-                transform:"translateY(0)"
-            });
-            return;
-        }
-        $(".pai.right").each(function(i,el){
-            $(this)
-                .removeClass("right")
-                .addClass("left")
-                .delay(i*30)
-                .animate({
-                    top:460,
-                    left:80
-                })
-                .css({zIndex:0})
+            // //第一次点击
+            // if(!pervious){
+            //     pervious=$(this);
+            // }else{
+            //     //第二次点击
+            //     if((pervious.data("shuZi") + $(this).data("shuZi"))===13){
+            //         $(".chulie").animate({
+            //                 top:0,
+            //                 left:700,
+            //                 opacity:0
+            //             }).queue(function(){
+            //                  $(".chulie").remove();
+            //             })
+            //         pervious=null;
+            //     }else{
+            //         $(".chulie")
+            //             .removeClass("chulie")
+            //             .animate({
+            //                 top:"+=30",
+            //             })
+            //         pervious=null;
+            //     }
+            // }
         })
+
+        //换牌的按钮
+        var zIndex=0;
+        $(".zhuozi .change").on("click",function(){
+            zIndex++;
+           $(".pai.left")
+               .eq(-1)
+               .css({zIndex:zIndex})
+               .removeClass("left")
+               .addClass("right")
+               .animate({
+                   top:460,
+                   left:530
+               })
+        })
+
+        //所有牌返回的次数
+        var time=0;
+        $(".zhuozi .return").on("click",function(){
+            time +=1;
+            if($(".pai.left").length){
+                return;
+            }
+            if(time>3){
+                $(".gameOver img")
+                .css({
+                    transform:"translateY(0)"
+                });
+                return;
+            }
+            $(".pai.right").each(function(i,el){
+                $(this)
+                    .removeClass("right")
+                    .addClass("left")
+                    .delay(i*30)
+                    .animate({
+                        top:460,
+                        left:80
+                    })
+                    .css({zIndex:0})
+            })
+        })
+    
+    
+
+    //开始按钮
+    $(".screen").on("click",function(){
+        $(".screen .leftScreen").css({transform:"translateX(-500%)"}) 
+        $(".screen .rightScreen").css({  transform:"translateX(500%)"}) 
+        $(".screen .start").animate({top:"-500%"})
+        $(this).css({zIndex:0})
+        $(".operate").animate({opacity:1})
     })
+    
 
     //鼠标划上按钮的效果
     $(".zhuozi .change, .zhuozi .return").on("mouseover",function(){
@@ -216,22 +225,9 @@ $(function(){
             transform:"scale(1,1)"
         })
     })
-    
 
-    //开始按钮
-    $(".screen").on("click",function(){
-        $(".screen .leftScreen").css({
-            transform:"translateX(-500%)"
-        }) 
-        $(".screen .rightScreen").css({
-            transform:"translateX(500%)"
-        }) 
-        $(".screen .start").animate({top:"-500%"})
-        $(this).css({
-            zIndex:0
-        })
-        $(".operate").animate({
-            opacity:1
-        })
+    //点击重新开始
+    $(".restart").on("click",function(){
+        window.location.reload();
     })
 })
