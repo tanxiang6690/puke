@@ -79,7 +79,7 @@ $(function(){
         }
         //给下面添加牌
         var d=0;
-        for(var index=0;index < poker.length; index++){
+        for(;index < poker.length; index++){
             d+=50;
             $("<div>")
                 .addClass("pai left")
