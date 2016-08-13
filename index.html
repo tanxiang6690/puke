@@ -1,37 +1,48 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>扑克牌游戏</title>
-</head>
-<link rel="stylesheet" href="index.css">
-<script src="jquery1.12.3.js"></script>
-<script src="index.js"></script>
-<body>
-	<!-- <div class="animation"></div> -->
-    <div class="screen">
-        <div class="leftScreen"></div>
-        <div class="rightScreen"></div>
-        <p class="start">游戏开始</p>
-    </div>
-	<div class="zhuozi">
-        <audio src="./image/4.mp3" autoplay></audio>
-        <div class="change"></div>
-        <div class="return"></div>
-        <div class="operate">
-        	<div class="faPai"><span>发牌</span></div>
-        	<div class="restart"><span>重新开始</span></div>
-        	<div class="instructor">
-                <span>游戏介绍</span>
-                <div class="jieshao">
-                    <p>1，当点击的两张牌没有被压住时并且相加等于13时可以消掉两张。</p>
-                    <p>2，当上面的牌没有被压住但是数字相加不等于13时可以在下部左面找牌。</p>
-                    <p>3，如果还不可以，可以将左面的牌翻到右边，知道左面的牌结束</p>
-                    <p>4，当所有左边的牌翻到右边并且上面的牌没有被消掉的话，还可以点击向左的按钮将牌返回，如此操作只可3次，3次之后没有消玩上面所有的牌时，游戏失败</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="gameOver"><img src="./image/end.jpg" alt=""></div>
-</body>
-</html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+	<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<title>谭翔扑克牌</title>
+	    <link rel="stylesheet" href="index.css">
+		<script src="jquery1.12.3.js"></script>
+	    <script src="index.js"></script>
+	</head>
+	<body>
+		<div class='bgbox'>
+			<div class="logo">
+			</div>
+			<div class="kepeidui"><span>此牌配对:</span><span class='font'>0</span></div>
+			<div class="zongpeidui"><span>剩余配对:</span><span class='font'>0</span></div>
+			<div class='display'>
+				<div class='score'>
+					<span>得分:</span>
+					<span class='font'>00</span>
+				</div>
+				<div class='time'>
+					<span>计时:</span>
+					<span class='font'>00:00</span>
+				</div>
+			</div>
+			<div class="meau">
+				<ul>
+				    <li class="stargame">开始游戏</li>
+				    <li class="againgame">重新开始</li>
+				    <li class="youxijieshao">游戏介绍</li>
+				    <span class='jieshao'><p>小游戏POKER是一款益智游戏。</p>
+					    <hr><p>说明：一张或者两张相加为“13”就能消除牌,每消除一张得10分。</p></span>
+				    <li class="closew">退出游戏</li>
+			    </ul>
+		    </div>
+		    <div class="zuozi">
+		        <div class="tishi">
+		    	    <div class="title">错误的</div>
+		    	    <div class="chahao"></div>
+		    	    <div class="queren"></div>
+		        </div>			
+			    <div class="move-right"></div>
+			    <div class="move-left"></div>
+			    <div class="move-contains"></div>
+		    </div>
+		</div>
+	</body>
+	</html>	
